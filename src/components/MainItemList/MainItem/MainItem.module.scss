@@ -1,0 +1,52 @@
+.Item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fffdff;
+  border: solid 3px #fffdff;
+  border-radius: 5px;
+  cursor: pointer;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:hover {
+    border-color: rgba(203,226,230, .6);
+  }
+  &.activeItem {
+    border-color: #cbe2e6;
+  }
+  .image {
+    flex: 1;
+    max-width: 30%;
+    max-height: 100px;
+    object-fit: contain;
+    margin-right: 20px;
+  }
+  .title {
+    flex: 1;
+    text-align: left;
+  }
+  .delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: red;
+    opacity: .4;
+    border: 1px solid #fffdff;
+    padding: 5px;
+    &:hover {
+      opacity: 1;
+      border: 1px solid #000;
+    }
+  }
+}
+
+@media (max-width: 510px){
+  .Item {
+    .image {
+      width: 125px;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.AddItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  .Element {
+    margin: 10px 0;
+    input {
+      text-align: center; 
+      margin-top: 5px;
+      width: 95%;
+    }
+  }
+  button {
+    margin-top: 20px;
+    width: 80px;
+    margin: 20px auto 10px auto;
+  }
+  .Error {
+    color: red;
+  }
+}
