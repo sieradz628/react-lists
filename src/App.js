@@ -1,4 +1,4 @@
-import MainItemList from './components/MainItemList'
+import ListWrapper from './components/ListWrapper'
 
 import logo from './assets/DeSmart-logo-black-500px.png'
 
@@ -12,7 +12,7 @@ const App = () => {
         <p>Please select one item:</p>
       </header>
       <div>
-        <MainItemList />
+        <ListWrapper />
       </div>
     </div>
   )

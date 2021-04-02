@@ -1,22 +1,24 @@
-import classes from './MainItem.module.scss'
+import React from 'react'
 
-const MainItem = ({ item, activeId, handleClick, deleteItem }) => {
+import classes from './Item.module.scss'
+
+const Item = ({ item, activeId, selectItem, deleteItem }) => {
   const { id, title, url } = item
 
   return (
     <div className={id === activeId ?
         [classes.Item, classes.activeItem].join(' ')
       : classes.Item}
-      onClick={() => handleClick(id)} >
+      onClick={() => selectItem(id)} >
       <img className={classes.image} 
         src={url}  
         alt={title}
       />
       <p className={classes.title} >{title}</p>
       <span className={classes.delete}
-        onClick={() => deleteItem(id)} >X</span>
+        onClick={() =>  deleteItem(id)} >X</span>
     </div>
   )
 }
 
-export default MainItem
+export default Item

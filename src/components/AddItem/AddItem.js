@@ -1,13 +1,43 @@
+import React, { useState, useCallback } from 'react'
+
+import { useDispatch } from 'react-redux';
+
 import classes from './AddItem.module.scss'
 
-const AddItem = ({ item, addItem, handleOnChange, addItemError }) => {
+const AddItem = () => {
+  const dispatch = useDispatch();
+  const [item, setItem] = useState({ url:'', title:'' })
+  const [addItemError, setAddItemError] = useState('')
+
+  const handleOnChange = useCallback((e) => {
+      const itemTemp = { ...item }
+      Object.keys(itemTemp).map((key) => {
+        if (key === e.target.id) {
+          return itemTemp[key] = e.target.value
+        } 
+        return null
+      })
+      setItem(itemTemp)
+    }, [ item ])
+
+  const addItem = useCallback(() => {
+    if (!item.url && !item.title) 
+      return setAddItemError('Please enter at least url or title')
+    if (item.url && !item.url.match(/https?:[^)''"]+\.(?:jpg|jpeg|gif|png)(?![a-z/])/g)) 
+      return setAddItemError('Please provide image url with .jpg, .jpeg, .gif or .png')
+
+    dispatch({ type: 'ADD_ITEM', payload: { id: 1000, title: item.title, url: item.url } })
+    setItem({ url:'', title:'' })
+    setAddItemError(false)
+  }, [ dispatch, item.url, item.title])
+
   return (
     <div className={classes.AddItem} >
       <div className={classes.Element} >
         <label>image url: </label>
         <input type='text' 
           id='url' 
-          placeholder='https://picsum.photos/250/120' 
+          placeholder='https://picsum.photos/250/120.jpg' 
           value={item.url} 
           onChange={handleOnChange}
         />
@@ -26,9 +56,9 @@ const AddItem = ({ item, addItem, handleOnChange, addItemError }) => {
         <p className={classes.Error} >{addItemError}</p> 
       : null }
 
-      <button onClick={() => addItem()} >Add Item</button>
+      <button onClick={addItem} >Add Item</button>
     </div>
   )
 }
 
-export default AddItem
+export default React.memo(AddItem)
