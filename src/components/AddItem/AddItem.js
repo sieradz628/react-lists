@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react'
 
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
 
 import classes from './AddItem.module.scss'
 
 const AddItem = () => {
   const dispatch = useDispatch();
+  const dbLength =  useSelector(store => store.db.length)
   const [item, setItem] = useState({ url:'', title:'' })
   const [addItemError, setAddItemError] = useState('')
 
@@ -26,10 +27,10 @@ const AddItem = () => {
     if (item.url && !item.url.match(/https?:[^)''"]+\.(?:jpg|jpeg|gif|png)(?![a-z/])/g)) 
       return setAddItemError('Please provide image url with .jpg, .jpeg, .gif or .png')
 
-    dispatch({ type: 'ADD_ITEM', payload: { id: 1000, title: item.title, url: item.url } })
+    dispatch({ type: 'ADD_ITEM', payload: { id: dbLength+1, title: item.title, url: item.url } })
     setItem({ url:'', title:'' })
     setAddItemError(false)
-  }, [ dispatch, item.url, item.title])
+  }, [ dispatch, item.url, item.title, dbLength])
 
   return (
     <div className={classes.AddItem} >
