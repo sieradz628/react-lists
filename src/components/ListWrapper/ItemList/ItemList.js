@@ -30,8 +30,6 @@ const ItemList = () => {
         el['title'].toLowerCase().indexOf(match.toLowerCase()) !== -1 
       : null)
 
-  console.log(db)
-
   return (
     <>
       <div className={classes.ListItem} >
